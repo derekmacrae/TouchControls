@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> </title>
+        <link rel="stylesheet" type="text/css" href="css/CombinedThemeStyleSheetRelease.css" />
+        <link rel="stylesheet" type="text/css" href="css/TouchTime.css" />
+        <script src="js/Timesheet_Common.js" type="text/javascript"></script>
+        <script src="https://ajax.microsoft.com/ajax/4.0/2/WebForms.js" type="text/javascript"></script>
+        <script src="js/TouchTime.js" type="text/javascript"></script>
+        <script src="js/jQueryRotate.2.2.js" type="text/javascript"></script>
+        <style>
+            #theClock {
+                opacity: 0;
+            }
+            #theClock24 {
+                opacity: 0;
+            }
+            .movable {
+                position: absolute;
+                top: -400px;
+                left: -400px;
+                }
+        </style>
+        <script type="text/javascript">
+            function findPos(obj) {
+                var curleft = 0
+                var curtop = 0;
+                if (obj.offsetParent) {
+                    do {
+                        curleft += obj.offsetLeft;
+                        curtop += obj.offsetTop;
+                        } while (obj = obj.offsetParent);
+                }
+                return [curleft,curtop];
+            }
+        </script>
+        <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
+         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write("<script src='../lib/jquery-1.6.2.min.js'>\x3C/script>")</script>
+    </head>
+    <body>
+        <img id="theClock" src="images/clock_face_12.png" class="movable" width="292px"/>
+        <img id="theClock24" src="images/clock_face_24.png" class="movable" width="292px"/>
+        <div id="theHourHand"></div>
+        <div id="theMinHand"></div>
+        <div id="theEdgeGlow"></div>
+        <table class="FormContent">
+        	<colgroup>
+    			<col style="width: 20%" />
+    			<col style="width: 30%" />
+    			<col style="width: 20%" />
+    			<col style="width: 30%" />
+    		</colgroup>
+    		<tbody>
+    			<tr id="ctl00_Main_trAssignmentAuth">
+                	<th>Week Ending</th>
+                	<td>02 Dec 2012</td>
+                	<td>for Derek Macrae</td>
+                </tr>
+    		</tbody>
+    	</table>
+        <br />
+    	<div id="ctl00_Main_TimesheetContent">
+        <table class="Results" cellspacing="0">
+        	<caption>
+        		Timesheet Entry
+        	</caption>
+        	<thead>
+        		<tr>
+        			<td class="Warning" align="center" colspan="13">
+        				<span id="ctl00_Main_ctl35_lblTopWarning"><div style="text-align: center">
+                                Please make sure Payroll receives your authorised timesheet by 14:00 hours Monday.<br />
+                                <span style="font-weight: bold">Please complete the number of hours/daily units worked each day in intervals of 15 minutes.</span><br />
+                                <span style="color: red">(&frac14; hour/day = 0.25 units, &frac12; hour/day = 0.50 units, &frac34; hour/day = 0.75 units)</span><br />
+                                On a daily timesheet, only enter multiples of 0.25, 0.5, 0.75 or 1
+                                </div></span>
+        			</td>
+        		</tr>
+        		<tr id="ctl00_Main_ctl35_trWTDHeader1">
+                    	<td rowspan="2" class="Header">
+                    				Date
+                    			</td>
+                    	<td rowspan="2" class="Header">
+
+                    				Rate
+                    			</td>
+                    	<td colspan="3" class="Header">
+                    				Before Break
+                    			</td>
+                    	<td colspan="3" class="Header">
+                    				After Break
+                    			</td>
+                    	<td class="Header" align="center" colspan="2" rowspan="2">
+                    				Total
+                    			</td>
+                    	<td id="ctl00_Main_ctl35_tdRateHeader" rowspan="2" class="Header">
+
+                    				Charge Rate
+                    			</td>
+                    	<td id="ctl00_Main_ctl35_tdRateTotalHeader" rowspan="2" class="Header">
+                    				Total
+                    			</td>
+                    	<td id="ctl00_Main_ctl35_tdAddRemoveHeader" rowspan="2" class="Header">
+                    			</td>
+                    </tr>
+            		<tr id="ctl00_Main_ctl35_trWTDHeader2">
+                    	<td class="Header" align="center">
+                    		Started
+                    	</td>
+                    	<td class="Header" align="center">
+                    		Finished
+                    	</td>
+                    	<td class="Header" align="center">
+                    		Units
+                    	</td>
+                    	<td class="Header" align="center">
+                    		Started
+                    	</td>
+                    	<td class="Header" align="center">
+                    		Finished
+                    	</td>
+                    	<td class="Header" align="center">
+                    		Units
+                    	</td>
+                    </tr>
+            	</thead>
+        	<tbody>
+            		<tr id="Row0" class="">
+            			<td align="center" class="NoWrap">
+            				<span id="lblDate0">
+            					Mon 26 Nov
+            				</span>
+            				<input type="hidden" name="TDIDHoursWorkedB0" id="TDIDHoursWorkedB0" value="0" />
+            				<input type="hidden" name="TSDate0" id="TSDate0" value="26 Nov 2012" />
+            				<input type="hidden" name="ContractID0" id="ContractID0" value="134172" />
+            				<input type="hidden" name="RateTypeID0" id="RateTypeID0" value="253" />
+            				<input type="hidden" name="ShiftID0" id="ShiftID0" value="" />
+            				<input type="hidden" name="PayRate0" id="PayRate0" value="7.1900" />
+            				<input type="hidden" name="SupplierRate0" id="SupplierRate0" value="9.9100" />
+            				<input type="hidden" name="Duration0" id="Duration0" value="Hrs" />
+            				<input type="hidden" name="Category0" id="Category0" value="Basic" />
+            				<input type="hidden" name="IsBasic0" id="IsBasic0" value="True" />
+            				<input type="hidden" name="rate0" id="rate0" value="10.3100" />
+            				<div id="ctl00_Main_ctl35_TSContent_ctl00_divProjectCode">
+            					<input type="hidden" name="ProjectCode_0" id="ProjectCode_0" value="" />
+            				</div>
+            				<input type="hidden" name="Deleted0" id="Deleted0" value="False" />
+            				<input type="hidden" name="CostCodeRequired0" id="CostCodeRequired0" value="False" />
+            				<input type="hidden" name="Editable0" id="Editable0" value="True" />
+            				<input type="hidden" name="MaxUnits0" id="MaxUnits0" value="0" />
+            			</td>
+
+            			<td id="ctl00_Main_ctl35_TSContent_ctl00_tdRateType">
+
+            				<select name="selRateID_0" id="selRateID_0" style="width:auto;" onchange="DoRate(this);">
+                                <option value="0|0|0|0|0|Hrs|None|||">Select</option>
+                                <option value="134172|253|7.1900|10.3100|9.9100|Hrs|Standard Invoice||IsBasic|Basic|CCNotRequired|0|0" selected="selected">Basic</option>
+                            </select>
+                            <br />
+            				<span id="lblOrigRateType0" class="red">
+
+            				</span>
+            			</td>
+
+            			<td id="ctl00_Main_ctl35_TSContent_ctl00_tdStartTimeA" align="center">
+
+            				<div id="ctl00_Main_ctl35_TSContent_ctl00_divStartTimeA" style="width: 100%; text-align: center">
+            					<input style="text-align: center;
+            									float: none;
+            									"
+            							type="text" onblur="parseTime(this);"
+            							name="txtStartTimeA0"
+            							id="txtStartTimeA0"
+            							class="w8_touch"
+            							maxlength="5"
+            							onmouseup="this.select();"
+            							value= "--:--" />
+            				</div>
+            			</td>
+
+            			<td id="ctl00_Main_ctl35_TSContent_ctl00_tdEndTimeA" align="center">
+
+            				<div id="ctl00_Main_ctl35_TSContent_ctl00_divEndTimeA" style="width: 100%; text-align: center">
+            					<input style="text-align: center;
+            									float: none;
+            									"
+            							type="text" onblur="parseTime(this);makeTotal(this);" name="txtEndTimeA0" id="txtEndTimeA0" class="w8_touch" maxlength="5" onmouseup="this.select();"
+                                         value="--:--" />
+            				</div>
+            			</td>
+
+            			<td id="ctl00_Main_ctl35_TSContent_ctl00_tdHoursWorkedA" align="right">
+
+            				<div id="ctl00_Main_ctl35_TSContent_ctl00_divHoursWorkedA" style="float: right">
+            					<input type="text" tabindex="-1" style="text-align: right; background-color: transparent; border: 0px; " name="txtHoursWorkedA0" id="txtHoursWorkedA0" class="w8" maxlength="6" onmouseup="this.select();" onblur="makeTotal(this);" value="0.00" readonly="readonly" />
+            				</div>
+            			</td>
+
+            			<td id="ctl00_Main_ctl35_TSContent_ctl00_tdStartTimeB" align="center">
+
+            				<div id="ctl00_Main_ctl35_TSContent_ctl00_divStartTimeB" style="width: 100%; text-align: center">
+            					<input style="text-align: center; float: none; " type="text" onblur="parseTime(this);" name="txtStartTimeB0" id="txtStartTimeB0" class="w8_touch" maxlength="5" onmouseup="this.select();"
+                                value="--:--" />
+            				</div>
+            			</td>
+
+            			<td id="ctl00_Main_ctl35_TSContent_ctl00_tdEndTimeB" align="center">
+
+            				<div id="ctl00_Main_ctl35_TSContent_ctl00_divEndTimeB" style="width: 100%; text-align: center">
+            					<input style="text-align: center; float: none; " type="text" onblur="parseTime(this);makeTotal(this);" name="txtEndTimeB0" id="txtEndTimeB0" class="w8_touch" maxlength="5" onmouseup="this.select();"
+                                value="--:--" />
+            				</div>
+            			</td>
+
+            			<td align="right" class="expnoshow0">
+
+            				<div id="ctl00_Main_ctl35_TSContent_ctl00_divHoursWorkedB" style="float: right">
+
+            							<input type="text" name="txtHoursWorkedB0" id="txtHoursWorkedB0" class="w8" maxlength="6" style="text-align:right; background-color: transparent; border:0px; " tabindex="-1" readonly="readonly" onmouseup="this.select();" onblur="this.value=FixedDP(this.value, '0.00', 2); makeTotal(this);" value="0.00" />
+            					</div>
+            			</td>
+            			<td id="ctl00_Main_ctl35_TSContent_ctl00_tdTotalHours" align="right" style="border-right: 0px;">
+
+            				<div id="ctl00_Main_ctl35_TSContent_ctl00_divTotalHours" style="float: right">
+            					<input type="text" name="txtTotalHours0" id="txtTotalHours0" class="w8_touch" value="0.00" tabindex="-1" readonly="readonly" style="text-align: right; background-color: transparent; border: 0px; " />
+            				</div>
+            			</td>
+
+            			<td class="expnoshow0">
+            				&nbsp;<span id="DurationLabel0">Hrs</span>
+            			</td>
+
+
+
+            			<td id="ctl00_Main_ctl35_TSContent_ctl00_tdCliRate" align="right">
+
+            				<div id="ctl00_Main_ctl35_TSContent_ctl00_divCliRate" style="float: right">
+            					<input style="text-align: right; background-color: transparent;" type="text" tabindex="-1" class="w8_touch" readonly="readonly" value="10.31" name="CliRate0" id="CliRate0" />
+            				</div>
+            			</td>
+
+            			<td id="ctl00_Main_ctl35_TSContent_ctl00_tdRateTotal" align="right">
+
+            				<div id="ctl00_Main_ctl35_TSContent_ctl00_divRateTotal" style="float: right">
+            					<input style="text-align: right; background-color: transparent;" type="text" tabindex="-1" class="w8_touch" readonly="readonly"
+            					value="0.00" name="ratetotal0" id="ratetotal0" />
+            				</div>
+            			</td>
+
+
+
+            			<td id="ctl00_Main_ctl35_TSContent_ctl00_tdAddRemove" style="text-align: center">
+            				<div id="ctl00_Main_ctl35_TSContent_ctl00_divAddRemove">
+            					<input type="button" id="AddRowButton0" value="Add Row" onclick="AddRow(this, 0)"  />
+            					<input type="button" id="SplitShiftButton0" value="Split Shift" onclick="AddRow(this, 0)" style="display:none;" />
+            					<input type="button" id="DelRowButton0" value="Remove" onclick="DelRow(this)" style="display:none;" />
+            				</div>
+            			</td>
+
+
+            		</tr>
+
+            				<tr id="Row1" class="">
+            					<td align="center" class="NoWrap">
+            						<span id="lblDate1">
+            							Tue 27 Nov
+            						</span>
+            						<input type="hidden" name="TDIDHoursWorkedB1" id="TDIDHoursWorkedB1" value="0" />
+            						<input type="hidden" name="TSDate1" id="TSDate1" value="27 Nov 2012" />
+            						<input type="hidden" name="ContractID1" id="ContractID1" value="134172" />
+            						<input type="hidden" name="RateTypeID1" id="RateTypeID1" value="253" />
+            						<input type="hidden" name="ShiftID1" id="ShiftID1" value="" />
+            						<input type="hidden" name="PayRate1" id="PayRate1" value="7.1900" />
+            						<input type="hidden" name="SupplierRate1" id="SupplierRate1" value="9.9100" />
+            						<input type="hidden" name="Duration1" id="Duration1" value="Hrs" />
+            						<input type="hidden" name="Category1" id="Category1" value="Basic" />
+            						<input type="hidden" name="IsBasic1" id="IsBasic1" value="True" />
+            						<input type="hidden" name="rate1" id="rate1" value="10.3100" />
+            						<div id="ctl00_Main_ctl35_TSContent_ctl01_divProjectCode">
+            							<input type="hidden" name="ProjectCode_1" id="ProjectCode_1" value="" />
+            						</div>
+            						<input type="hidden" name="Deleted1" id="Deleted1" value="False" />
+            						<input type="hidden" name="CostCodeRequired1" id="CostCodeRequired1" value="False" />
+            						<input type="hidden" name="Editable1" id="Editable1" value="True" />
+            						<input type="hidden" name="MaxUnits1" id="MaxUnits1" value="0" />
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl01_tdRateType">
+
+            						<select name="selRateID_1" id="selRateID_1" style="width:auto;" onchange="DoRate(this);">
+            <option value="0|0|0|0|0|Hrs|None|||">Select</option>
+            <option value="134172|253|7.1900|10.3100|9.9100|Hrs|Standard Invoice||IsBasic|Basic|CCNotRequired|0|0" selected="selected">Basic</option>
+            </select>
+            <br />
+            						<span id="lblOrigRateType1" class="red">
+
+            						</span>
+            					</td>
+
+
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl01_tdStartTimeA" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl01_divStartTimeA" style="width: 100%; text-align: center">
+            							<input style="text-align: center;
+            											float: none;
+            											"
+            									type="text" onblur="parseTime(this);"
+            									name="txtStartTimeA1"
+            									id="txtStartTimeA1"
+            									class="w8_touch"
+            									maxlength="5"
+            									onmouseup="this.select();"
+            									value= "--:--" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl01_tdEndTimeA" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl01_divEndTimeA" style="width: 100%; text-align: center">
+            							<input style="text-align: center;
+            											float: none;
+            											"
+            									type="text" onblur="parseTime(this);makeTotal(this);" name="txtEndTimeA1" id="txtEndTimeA1" class="w8_touch" maxlength="5" onmouseup="this.select();"
+                                                 value="--:--" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl01_tdHoursWorkedA" align="right">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl01_divHoursWorkedA" style="float: right">
+            							<input type="text" tabindex="-1" style="text-align: right; background-color: transparent; border: 0px; " name="txtHoursWorkedA1" id="txtHoursWorkedA1" class="w8" maxlength="6" onmouseup="this.select();" onblur="makeTotal(this);" value="0.00" readonly="readonly" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl01_tdStartTimeB" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl01_divStartTimeB" style="width: 100%; text-align: center">
+            							<input style="text-align: center; float: none; " type="text" onblur="parseTime(this);" name="txtStartTimeB1" id="txtStartTimeB1" class="w8_touch" maxlength="5" onmouseup="this.select();"
+                                        value="--:--" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl01_tdEndTimeB" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl01_divEndTimeB" style="width: 100%; text-align: center">
+            							<input style="text-align: center; float: none; " type="text" onblur="parseTime(this);makeTotal(this);" name="txtEndTimeB1" id="txtEndTimeB1" class="w8_touch" maxlength="5" onmouseup="this.select();"
+                                        value="--:--" />
+            						</div>
+            					</td>
+
+            					<td align="right" class="expnoshow1">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl01_divHoursWorkedB" style="float: right">
+
+            									<input type="text" name="txtHoursWorkedB1" id="txtHoursWorkedB1" class="w8" maxlength="6" style="text-align:right; background-color: transparent; border:0px; " tabindex="-1" readonly="readonly" onmouseup="this.select();" onblur="this.value=FixedDP(this.value, '0.00', 2); makeTotal(this);" value="0.00" />
+            							</div>
+            					</td>
+            					<td id="ctl00_Main_ctl35_TSContent_ctl01_tdTotalHours" align="right" style="border-right: 0px;">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl01_divTotalHours" style="float: right">
+            							<input type="text" name="txtTotalHours1" id="txtTotalHours1" class="w8_touch" value="0.00" tabindex="-1" readonly="readonly" style="text-align: right; background-color: transparent; border: 0px; " />
+            						</div>
+            					</td>
+
+            					<td class="expnoshow1">
+            						&nbsp;<span id="DurationLabel1">Hrs</span>
+            					</td>
+            					<td id="ctl00_Main_ctl35_TSContent_ctl01_tdCliRate" align="right">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl01_divCliRate" style="float: right">
+            							<input style="text-align: right; background-color: transparent;" type="text" tabindex="-1" class="w8_touch" readonly="readonly" value="10.31" name="CliRate1" id="CliRate1" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl01_tdRateTotal" align="right">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl01_divRateTotal" style="float: right">
+            							<input style="text-align: right; background-color: transparent;" type="text" tabindex="-1" class="w8_touch" readonly="readonly"
+            							value="0.00" name="ratetotal1" id="ratetotal1" />
+            						</div>
+            					</td>
+
+
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl01_tdAddRemove" style="text-align: center">
+            						<div id="ctl00_Main_ctl35_TSContent_ctl01_divAddRemove">
+            							<input type="button" id="AddRowButton1" value="Add Row" onclick="AddRow(this, 1)"  />
+            							<input type="button" id="SplitShiftButton1" value="Split Shift" onclick="AddRow(this, 1)" style="display:none;" />
+            							<input type="button" id="DelRowButton1" value="Remove" onclick="DelRow(this)" style="display:none;" />
+            						</div>
+            					</td>
+
+
+            				</tr>
+
+            				<tr id="Row2" class="">
+            					<td align="center" class="NoWrap">
+            						<span id="lblDate2">
+            							Wed 28 Nov
+            						</span>
+            						<input type="hidden" name="TDIDHoursWorkedB2" id="TDIDHoursWorkedB2" value="0" />
+            						<input type="hidden" name="TSDate2" id="TSDate2" value="28 Nov 2012" />
+            						<input type="hidden" name="ContractID2" id="ContractID2" value="134172" />
+            						<input type="hidden" name="RateTypeID2" id="RateTypeID2" value="253" />
+            						<input type="hidden" name="ShiftID2" id="ShiftID2" value="" />
+            						<input type="hidden" name="PayRate2" id="PayRate2" value="7.1900" />
+            						<input type="hidden" name="SupplierRate2" id="SupplierRate2" value="9.9100" />
+            						<input type="hidden" name="Duration2" id="Duration2" value="Hrs" />
+            						<input type="hidden" name="Category2" id="Category2" value="Basic" />
+            						<input type="hidden" name="IsBasic2" id="IsBasic2" value="True" />
+            						<input type="hidden" name="rate2" id="rate2" value="10.3100" />
+            						<div id="ctl00_Main_ctl35_TSContent_ctl02_divProjectCode">
+            							<input type="hidden" name="ProjectCode_2" id="ProjectCode_2" value="" />
+            						</div>
+            						<input type="hidden" name="Deleted2" id="Deleted2" value="False" />
+            						<input type="hidden" name="CostCodeRequired2" id="CostCodeRequired2" value="False" />
+            						<input type="hidden" name="Editable2" id="Editable2" value="True" />
+            						<input type="hidden" name="MaxUnits2" id="MaxUnits2" value="0" />
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl02_tdRateType">
+
+            						<select name="selRateID_2" id="selRateID_2" style="width:auto;" onchange="DoRate(this);">
+            <option value="0|0|0|0|0|Hrs|None|||">Select</option>
+            <option value="134172|253|7.1900|10.3100|9.9100|Hrs|Standard Invoice||IsBasic|Basic|CCNotRequired|0|0" selected="selected">Basic</option>
+            </select>
+            <br />
+            						<span id="lblOrigRateType2" class="red">
+
+            						</span>
+            					</td>
+
+
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl02_tdStartTimeA" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl02_divStartTimeA" style="width: 100%; text-align: center">
+            							<input style="text-align: center;
+            											float: none;
+            											"
+            									type="text" onblur="parseTime(this);"
+            									name="txtStartTimeA2"
+            									id="txtStartTimeA2"
+            									class="w8_touch"
+            									maxlength="5"
+            									onmouseup="this.select();"
+            									value= "--:--" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl02_tdEndTimeA" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl02_divEndTimeA" style="width: 100%; text-align: center">
+            							<input style="text-align: center;
+            											float: none;
+            											"
+            									type="text" onblur="parseTime(this);makeTotal(this);" name="txtEndTimeA2" id="txtEndTimeA2" class="w8_touch" maxlength="5" onmouseup="this.select();"
+                                                 value="--:--" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl02_tdHoursWorkedA" align="right">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl02_divHoursWorkedA" style="float: right">
+            							<input type="text" tabindex="-1" style="text-align: right; background-color: transparent; border: 0px; " name="txtHoursWorkedA2" id="txtHoursWorkedA2" class="w8" maxlength="6" onmouseup="this.select();" onblur="makeTotal(this);" value="0.00" readonly="readonly" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl02_tdStartTimeB" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl02_divStartTimeB" style="width: 100%; text-align: center">
+            							<input style="text-align: center; float: none; " type="text" onblur="parseTime(this);" name="txtStartTimeB2" id="txtStartTimeB2" class="w8_touch" maxlength="5" onmouseup="this.select();"
+                                        value="--:--" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl02_tdEndTimeB" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl02_divEndTimeB" style="width: 100%; text-align: center">
+            							<input style="text-align: center; float: none; " type="text" onblur="parseTime(this);makeTotal(this);" name="txtEndTimeB2" id="txtEndTimeB2" class="w8_touch" maxlength="5" onmouseup="this.select();"
+                                        value="--:--" />
+            						</div>
+            					</td>
+
+            					<td align="right" class="expnoshow2">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl02_divHoursWorkedB" style="float: right">
+
+            									<input type="text" name="txtHoursWorkedB2" id="txtHoursWorkedB2" class="w8" maxlength="6" style="text-align:right; background-color: transparent; border:0px; " tabindex="-1" readonly="readonly" onmouseup="this.select();" onblur="this.value=FixedDP(this.value, '0.00', 2); makeTotal(this);" value="0.00" />
+            							</div>
+            					</td>
+            					<td id="ctl00_Main_ctl35_TSContent_ctl02_tdTotalHours" align="right" style="border-right: 0px;">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl02_divTotalHours" style="float: right">
+            							<input type="text" name="txtTotalHours2" id="txtTotalHours2" class="w8_touch" value="0.00" tabindex="-1" readonly="readonly" style="text-align: right; background-color: transparent; border: 0px; " />
+            						</div>
+            					</td>
+
+            					<td class="expnoshow2">
+            						&nbsp;<span id="DurationLabel2">Hrs</span>
+            					</td>
+
+
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl02_tdCliRate" align="right">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl02_divCliRate" style="float: right">
+            							<input style="text-align: right; background-color: transparent;" type="text" tabindex="-1" class="w8_touch" readonly="readonly" value="10.31" name="CliRate2" id="CliRate2" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl02_tdRateTotal" align="right">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl02_divRateTotal" style="float: right">
+            							<input style="text-align: right; background-color: transparent;" type="text" tabindex="-1" class="w8_touch" readonly="readonly"
+            							value="0.00" name="ratetotal2" id="ratetotal2" />
+            						</div>
+            					</td>
+
+
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl02_tdAddRemove" style="text-align: center">
+            						<div id="ctl00_Main_ctl35_TSContent_ctl02_divAddRemove">
+            							<input type="button" id="AddRowButton2" value="Add Row" onclick="AddRow(this, 2)"  />
+            							<input type="button" id="SplitShiftButton2" value="Split Shift" onclick="AddRow(this, 2)" style="display:none;" />
+            							<input type="button" id="DelRowButton2" value="Remove" onclick="DelRow(this)" style="display:none;" />
+            						</div>
+            					</td>
+
+
+            				</tr>
+
+            				<tr id="Row3" class="">
+            					<td align="center" class="NoWrap">
+            						<span id="lblDate3">
+            							Thu 29 Nov
+            						</span>
+            						<input type="hidden" name="TDIDHoursWorkedB3" id="TDIDHoursWorkedB3" value="0" />
+            						<input type="hidden" name="TSDate3" id="TSDate3" value="29 Nov 2012" />
+            						<input type="hidden" name="ContractID3" id="ContractID3" value="134172" />
+            						<input type="hidden" name="RateTypeID3" id="RateTypeID3" value="253" />
+            						<input type="hidden" name="ShiftID3" id="ShiftID3" value="" />
+            						<input type="hidden" name="PayRate3" id="PayRate3" value="7.1900" />
+            						<input type="hidden" name="SupplierRate3" id="SupplierRate3" value="9.9100" />
+            						<input type="hidden" name="Duration3" id="Duration3" value="Hrs" />
+            						<input type="hidden" name="Category3" id="Category3" value="Basic" />
+            						<input type="hidden" name="IsBasic3" id="IsBasic3" value="True" />
+            						<input type="hidden" name="rate3" id="rate3" value="10.3100" />
+            						<div id="ctl00_Main_ctl35_TSContent_ctl03_divProjectCode">
+            							<input type="hidden" name="ProjectCode_3" id="ProjectCode_3" value="" />
+            						</div>
+            						<input type="hidden" name="Deleted3" id="Deleted3" value="False" />
+            						<input type="hidden" name="CostCodeRequired3" id="CostCodeRequired3" value="False" />
+            						<input type="hidden" name="Editable3" id="Editable3" value="True" />
+            						<input type="hidden" name="MaxUnits3" id="MaxUnits3" value="0" />
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl03_tdRateType">
+
+            						<select name="selRateID_3" id="selRateID_3" style="width:auto;" onchange="DoRate(this);">
+            <option value="0|0|0|0|0|Hrs|None|||">Select</option>
+            <option value="134172|253|7.1900|10.3100|9.9100|Hrs|Standard Invoice||IsBasic|Basic|CCNotRequired|0|0" selected="selected">Basic</option>
+            </select>
+            <br />
+            						<span id="lblOrigRateType3" class="red">
+
+            						</span>
+            					</td>
+
+
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl03_tdStartTimeA" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl03_divStartTimeA" style="width: 100%; text-align: center">
+            							<input style="text-align: center;
+            											float: none;
+            											"
+            									type="text" onblur="parseTime(this);"
+            									name="txtStartTimeA3"
+            									id="txtStartTimeA3"
+            									class="w8_touch"
+            									maxlength="5"
+            									onmouseup="this.select();"
+            									value= "--:--" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl03_tdEndTimeA" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl03_divEndTimeA" style="width: 100%; text-align: center">
+            							<input style="text-align: center;
+            											float: none;
+            											"
+            									type="text" onblur="parseTime(this);makeTotal(this);" name="txtEndTimeA3" id="txtEndTimeA3" class="w8_touch" maxlength="5" onmouseup="this.select();"
+                                                 value="--:--" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl03_tdHoursWorkedA" align="right">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl03_divHoursWorkedA" style="float: right">
+            							<input type="text" tabindex="-1" style="text-align: right; background-color: transparent; border: 0px; " name="txtHoursWorkedA3" id="txtHoursWorkedA3" class="w8" maxlength="6" onmouseup="this.select();" onblur="makeTotal(this);" value="0.00" readonly="readonly" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl03_tdStartTimeB" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl03_divStartTimeB" style="width: 100%; text-align: center">
+            							<input style="text-align: center; float: none; " type="text" onblur="parseTime(this);" name="txtStartTimeB3" id="txtStartTimeB3" class="w8_touch" maxlength="5" onmouseup="this.select();"
+                                        value="--:--" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl03_tdEndTimeB" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl03_divEndTimeB" style="width: 100%; text-align: center">
+            							<input style="text-align: center; float: none; " type="text" onblur="parseTime(this);makeTotal(this);" name="txtEndTimeB3" id="txtEndTimeB3" class="w8_touch" maxlength="5" onmouseup="this.select();"
+                                        value="--:--" />
+            						</div>
+            					</td>
+
+            					<td align="right" class="expnoshow3">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl03_divHoursWorkedB" style="float: right">
+
+            									<input type="text" name="txtHoursWorkedB3" id="txtHoursWorkedB3" class="w8" maxlength="6" style="text-align:right; background-color: transparent; border:0px; " tabindex="-1" readonly="readonly" onmouseup="this.select();" onblur="this.value=FixedDP(this.value, '0.00', 2); makeTotal(this);" value="0.00" />
+            							</div>
+            					</td>
+            					<td id="ctl00_Main_ctl35_TSContent_ctl03_tdTotalHours" align="right" style="border-right: 0px;">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl03_divTotalHours" style="float: right">
+            							<input type="text" name="txtTotalHours3" id="txtTotalHours3" class="w8_touch" value="0.00" tabindex="-1" readonly="readonly" style="text-align: right; background-color: transparent; border: 0px; " />
+            						</div>
+            					</td>
+
+            					<td class="expnoshow3">
+            						&nbsp;<span id="DurationLabel3">Hrs</span>
+            					</td>
+
+
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl03_tdCliRate" align="right">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl03_divCliRate" style="float: right">
+            							<input style="text-align: right; background-color: transparent;" type="text" tabindex="-1" class="w8_touch" readonly="readonly" value="10.31" name="CliRate3" id="CliRate3" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl03_tdRateTotal" align="right">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl03_divRateTotal" style="float: right">
+            							<input style="text-align: right; background-color: transparent;" type="text" tabindex="-1" class="w8_touch" readonly="readonly"
+            							value="0.00" name="ratetotal3" id="ratetotal3" />
+            						</div>
+            					</td>
+
+
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl03_tdAddRemove" style="text-align: center">
+            						<div id="ctl00_Main_ctl35_TSContent_ctl03_divAddRemove">
+            							<input type="button" id="AddRowButton3" value="Add Row" onclick="AddRow(this, 3)"  />
+            							<input type="button" id="SplitShiftButton3" value="Split Shift" onclick="AddRow(this, 3)" style="display:none;" />
+            							<input type="button" id="DelRowButton3" value="Remove" onclick="DelRow(this)" style="display:none;" />
+            						</div>
+            					</td>
+
+
+            				</tr>
+
+            				<tr id="Row4" class="">
+            					<td align="center" class="NoWrap">
+            						<span id="lblDate4">
+            							Fri 30 Nov
+            						</span>
+            						<input type="hidden" name="TDIDHoursWorkedB4" id="TDIDHoursWorkedB4" value="0" />
+            						<input type="hidden" name="TSDate4" id="TSDate4" value="30 Nov 2012" />
+            						<input type="hidden" name="ContractID4" id="ContractID4" value="134172" />
+            						<input type="hidden" name="RateTypeID4" id="RateTypeID4" value="253" />
+            						<input type="hidden" name="ShiftID4" id="ShiftID4" value="" />
+            						<input type="hidden" name="PayRate4" id="PayRate4" value="7.1900" />
+            						<input type="hidden" name="SupplierRate4" id="SupplierRate4" value="9.9100" />
+            						<input type="hidden" name="Duration4" id="Duration4" value="Hrs" />
+            						<input type="hidden" name="Category4" id="Category4" value="Basic" />
+            						<input type="hidden" name="IsBasic4" id="IsBasic4" value="True" />
+            						<input type="hidden" name="rate4" id="rate4" value="10.3100" />
+            						<div id="ctl00_Main_ctl35_TSContent_ctl04_divProjectCode">
+            							<input type="hidden" name="ProjectCode_4" id="ProjectCode_4" value="" />
+            						</div>
+            						<input type="hidden" name="Deleted4" id="Deleted4" value="False" />
+            						<input type="hidden" name="CostCodeRequired4" id="CostCodeRequired4" value="False" />
+            						<input type="hidden" name="Editable4" id="Editable4" value="True" />
+            						<input type="hidden" name="MaxUnits4" id="MaxUnits4" value="0" />
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl04_tdRateType">
+
+            						<select name="selRateID_4" id="selRateID_4" style="width:auto;" onchange="DoRate(this);">
+            <option value="0|0|0|0|0|Hrs|None|||">Select</option>
+            <option value="134172|253|7.1900|10.3100|9.9100|Hrs|Standard Invoice||IsBasic|Basic|CCNotRequired|0|0" selected="selected">Basic</option>
+            </select>
+            <br />
+            						<span id="lblOrigRateType4" class="red">
+
+            						</span>
+            					</td>
+
+
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl04_tdStartTimeA" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl04_divStartTimeA" style="width: 100%; text-align: center">
+            							<input style="text-align: center;
+            											float: none;
+            											"
+            									type="text" onblur="parseTime(this);"
+            									name="txtStartTimeA4"
+            									id="txtStartTimeA4"
+            									class="w8_touch"
+            									maxlength="5"
+            									onmouseup="this.select();"
+            									value= "--:--" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl04_tdEndTimeA" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl04_divEndTimeA" style="width: 100%; text-align: center">
+            							<input style="text-align: center;
+            											float: none;
+            											"
+            									type="text" onblur="parseTime(this);makeTotal(this);" name="txtEndTimeA4" id="txtEndTimeA4" class="w8_touch" maxlength="5" onmouseup="this.select();"
+                                                 value="--:--" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl04_tdHoursWorkedA" align="right">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl04_divHoursWorkedA" style="float: right">
+            							<input type="text" tabindex="-1" style="text-align: right; background-color: transparent; border: 0px; " name="txtHoursWorkedA4" id="txtHoursWorkedA4" class="w8" maxlength="6" onmouseup="this.select();" onblur="makeTotal(this);" value="0.00" readonly="readonly" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl04_tdStartTimeB" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl04_divStartTimeB" style="width: 100%; text-align: center">
+            							<input style="text-align: center; float: none; " type="text" onblur="parseTime(this);" name="txtStartTimeB4" id="txtStartTimeB4" class="w8_touch" maxlength="5" onmouseup="this.select();"
+                                        value="--:--" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl04_tdEndTimeB" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl04_divEndTimeB" style="width: 100%; text-align: center">
+            							<input style="text-align: center; float: none; " type="text" onblur="parseTime(this);makeTotal(this);" name="txtEndTimeB4" id="txtEndTimeB4" class="w8_touch" maxlength="5" onmouseup="this.select();"
+                                        value="--:--" />
+            						</div>
+            					</td>
+
+            					<td align="right" class="expnoshow4">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl04_divHoursWorkedB" style="float: right">
+
+            									<input type="text" name="txtHoursWorkedB4" id="txtHoursWorkedB4" class="w8" maxlength="6" style="text-align:right; background-color: transparent; border:0px; " tabindex="-1" readonly="readonly" onmouseup="this.select();" onblur="this.value=FixedDP(this.value, '0.00', 2); makeTotal(this);" value="0.00" />
+            							</div>
+            					</td>
+            					<td id="ctl00_Main_ctl35_TSContent_ctl04_tdTotalHours" align="right" style="border-right: 0px;">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl04_divTotalHours" style="float: right">
+            							<input type="text" name="txtTotalHours4" id="txtTotalHours4" class="w8_touch" value="0.00" tabindex="-1" readonly="readonly" style="text-align: right; background-color: transparent; border: 0px; " />
+            						</div>
+            					</td>
+
+            					<td class="expnoshow4">
+            						&nbsp;<span id="DurationLabel4">Hrs</span>
+            					</td>
+
+
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl04_tdCliRate" align="right">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl04_divCliRate" style="float: right">
+            							<input style="text-align: right; background-color: transparent;" type="text" tabindex="-1" class="w8_touch" readonly="readonly" value="10.31" name="CliRate4" id="CliRate4" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl04_tdRateTotal" align="right">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl04_divRateTotal" style="float: right">
+            							<input style="text-align: right; background-color: transparent;" type="text" tabindex="-1" class="w8_touch" readonly="readonly"
+            							value="0.00" name="ratetotal4" id="ratetotal4" />
+            						</div>
+            					</td>
+
+
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl04_tdAddRemove" style="text-align: center">
+            						<div id="ctl00_Main_ctl35_TSContent_ctl04_divAddRemove">
+            							<input type="button" id="AddRowButton4" value="Add Row" onclick="AddRow(this, 4)"  />
+            							<input type="button" id="SplitShiftButton4" value="Split Shift" onclick="AddRow(this, 4)" style="display:none;" />
+            							<input type="button" id="DelRowButton4" value="Remove" onclick="DelRow(this)" style="display:none;" />
+            						</div>
+            					</td>
+
+
+            				</tr>
+
+            				<tr id="Row5" class="LoLite">
+            					<td align="center" class="NoWrap">
+            						<span id="lblDate5">
+            							Sat 01 Dec
+            						</span>
+            						<input type="hidden" name="TDIDHoursWorkedB5" id="TDIDHoursWorkedB5" value="0" />
+            						<input type="hidden" name="TSDate5" id="TSDate5" value="01 Dec 2012" />
+            						<input type="hidden" name="ContractID5" id="ContractID5" value="134172" />
+            						<input type="hidden" name="RateTypeID5" id="RateTypeID5" value="253" />
+            						<input type="hidden" name="ShiftID5" id="ShiftID5" value="" />
+            						<input type="hidden" name="PayRate5" id="PayRate5" value="7.1900" />
+            						<input type="hidden" name="SupplierRate5" id="SupplierRate5" value="9.9100" />
+            						<input type="hidden" name="Duration5" id="Duration5" value="Hrs" />
+            						<input type="hidden" name="Category5" id="Category5" value="Basic" />
+            						<input type="hidden" name="IsBasic5" id="IsBasic5" value="True" />
+            						<input type="hidden" name="rate5" id="rate5" value="10.3100" />
+            						<div id="ctl00_Main_ctl35_TSContent_ctl05_divProjectCode">
+            							<input type="hidden" name="ProjectCode_5" id="ProjectCode_5" value="" />
+            						</div>
+            						<input type="hidden" name="Deleted5" id="Deleted5" value="False" />
+            						<input type="hidden" name="CostCodeRequired5" id="CostCodeRequired5" value="False" />
+            						<input type="hidden" name="Editable5" id="Editable5" value="True" />
+            						<input type="hidden" name="MaxUnits5" id="MaxUnits5" value="0" />
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl05_tdRateType">
+
+            						<select name="selRateID_5" id="selRateID_5" style="width:auto;" onchange="DoRate(this);">
+            <option value="0|0|0|0|0|Hrs|None|||">Select</option>
+            <option value="134172|253|7.1900|10.3100|9.9100|Hrs|Standard Invoice||IsBasic|Basic|CCNotRequired|0|0" selected="selected">Basic</option>
+            </select>
+            <br />
+            						<span id="lblOrigRateType5" class="red">
+
+            						</span>
+            					</td>
+
+
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl05_tdStartTimeA" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl05_divStartTimeA" style="width: 100%; text-align: center">
+            							<input style="text-align: center;
+            											float: none;
+            											"
+            									type="text" onblur="parseTime(this);"
+            									name="txtStartTimeA5"
+            									id="txtStartTimeA5"
+            									class="w8_touch"
+            									maxlength="5"
+            									onmouseup="this.select();"
+            									value= "--:--" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl05_tdEndTimeA" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl05_divEndTimeA" style="width: 100%; text-align: center">
+            							<input style="text-align: center;
+            											float: none;
+            											"
+            									type="text" onblur="parseTime(this);makeTotal(this);" name="txtEndTimeA5" id="txtEndTimeA5" class="w8_touch" maxlength="5" onmouseup="this.select();"
+                                                 value="--:--" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl05_tdHoursWorkedA" align="right">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl05_divHoursWorkedA" style="float: right">
+            							<input type="text" tabindex="-1" style="text-align: right; background-color: transparent; border: 0px; " name="txtHoursWorkedA5" id="txtHoursWorkedA5" class="w8" maxlength="6" onmouseup="this.select();" onblur="makeTotal(this);" value="0.00" readonly="readonly" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl05_tdStartTimeB" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl05_divStartTimeB" style="width: 100%; text-align: center">
+            							<input style="text-align: center; float: none; " type="text" onblur="parseTime(this);" name="txtStartTimeB5" id="txtStartTimeB5" class="w8_touch" maxlength="5" onmouseup="this.select();"
+                                        value="--:--" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl05_tdEndTimeB" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl05_divEndTimeB" style="width: 100%; text-align: center">
+            							<input style="text-align: center; float: none; " type="text" onblur="parseTime(this);makeTotal(this);" name="txtEndTimeB5" id="txtEndTimeB5" class="w8_touch" maxlength="5" onmouseup="this.select();"
+                                        value="--:--" />
+            						</div>
+            					</td>
+
+            					<td align="right" class="expnoshow5">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl05_divHoursWorkedB" style="float: right">
+
+            									<input type="text" name="txtHoursWorkedB5" id="txtHoursWorkedB5" class="w8" maxlength="6" style="text-align:right; background-color: transparent; border:0px; " tabindex="-1" readonly="readonly" onmouseup="this.select();" onblur="this.value=FixedDP(this.value, '0.00', 2); makeTotal(this);" value="0.00" />
+            							</div>
+            					</td>
+            					<td id="ctl00_Main_ctl35_TSContent_ctl05_tdTotalHours" align="right" style="border-right: 0px;">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl05_divTotalHours" style="float: right">
+            							<input type="text" name="txtTotalHours5" id="txtTotalHours5" class="w8_touch" value="0.00" tabindex="-1" readonly="readonly" style="text-align: right; background-color: transparent; border: 0px; " />
+            						</div>
+            					</td>
+
+            					<td class="expnoshow5">
+            						&nbsp;<span id="DurationLabel5">Hrs</span>
+            					</td>
+
+
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl05_tdCliRate" align="right">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl05_divCliRate" style="float: right">
+            							<input style="text-align: right; background-color: transparent;" type="text" tabindex="-1" class="w8_touch" readonly="readonly" value="10.31" name="CliRate5" id="CliRate5" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl05_tdRateTotal" align="right">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl05_divRateTotal" style="float: right">
+            							<input style="text-align: right; background-color: transparent;" type="text" tabindex="-1" class="w8_touch" readonly="readonly"
+            							value="0.00" name="ratetotal5" id="ratetotal5" />
+            						</div>
+            					</td>
+
+
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl05_tdAddRemove" style="text-align: center">
+            						<div id="ctl00_Main_ctl35_TSContent_ctl05_divAddRemove">
+            							<input type="button" id="AddRowButton5" value="Add Row" onclick="AddRow(this, 5)"  />
+            							<input type="button" id="SplitShiftButton5" value="Split Shift" onclick="AddRow(this, 5)" style="display:none;" />
+            							<input type="button" id="DelRowButton5" value="Remove" onclick="DelRow(this)" style="display:none;" />
+            						</div>
+            					</td>
+
+
+            				</tr>
+
+            				<tr id="Row6" class="LoLite">
+            					<td align="center" class="NoWrap">
+            						<span id="lblDate6">
+            							Sun 02 Dec
+            						</span>
+            						<input type="hidden" name="TDIDHoursWorkedB6" id="TDIDHoursWorkedB6" value="0" />
+            						<input type="hidden" name="TSDate6" id="TSDate6" value="02 Dec 2012" />
+            						<input type="hidden" name="ContractID6" id="ContractID6" value="134172" />
+            						<input type="hidden" name="RateTypeID6" id="RateTypeID6" value="253" />
+            						<input type="hidden" name="ShiftID6" id="ShiftID6" value="" />
+            						<input type="hidden" name="PayRate6" id="PayRate6" value="7.1900" />
+            						<input type="hidden" name="SupplierRate6" id="SupplierRate6" value="9.9100" />
+            						<input type="hidden" name="Duration6" id="Duration6" value="Hrs" />
+            						<input type="hidden" name="Category6" id="Category6" value="Basic" />
+            						<input type="hidden" name="IsBasic6" id="IsBasic6" value="True" />
+            						<input type="hidden" name="rate6" id="rate6" value="10.3100" />
+            						<div id="ctl00_Main_ctl35_TSContent_ctl06_divProjectCode">
+            							<input type="hidden" name="ProjectCode_6" id="ProjectCode_6" value="" />
+            						</div>
+            						<input type="hidden" name="Deleted6" id="Deleted6" value="False" />
+            						<input type="hidden" name="CostCodeRequired6" id="CostCodeRequired6" value="False" />
+            						<input type="hidden" name="Editable6" id="Editable6" value="True" />
+            						<input type="hidden" name="MaxUnits6" id="MaxUnits6" value="0" />
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl06_tdRateType">
+
+            						<select name="selRateID_6" id="selRateID_6" style="width:auto;" onchange="DoRate(this);">
+            <option value="0|0|0|0|0|Hrs|None|||">Select</option>
+            <option value="134172|253|7.1900|10.3100|9.9100|Hrs|Standard Invoice||IsBasic|Basic|CCNotRequired|0|0" selected="selected">Basic</option>
+            </select>
+            <br />
+            						<span id="lblOrigRateType6" class="red">
+
+            						</span>
+            					</td>
+
+
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl06_tdStartTimeA" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl06_divStartTimeA" style="width: 100%; text-align: center">
+            							<input style="text-align: center;
+            											float: none;
+            											"
+            									type="text" onblur="parseTime(this);"
+            									name="txtStartTimeA6"
+            									id="txtStartTimeA6"
+            									class="w8_touch"
+            									maxlength="5"
+            									onmouseup="this.select();"
+            									value= "--:--" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl06_tdEndTimeA" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl06_divEndTimeA" style="width: 100%; text-align: center">
+            							<input style="text-align: center;
+            											float: none;
+            											"
+            									type="text" onblur="parseTime(this);makeTotal(this);" name="txtEndTimeA6" id="txtEndTimeA6" class="w8_touch" maxlength="5" onmouseup="this.select();"
+                                                 value="--:--" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl06_tdHoursWorkedA" align="right">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl06_divHoursWorkedA" style="float: right">
+            							<input type="text" tabindex="-1" style="text-align: right; background-color: transparent; border: 0px; " name="txtHoursWorkedA6" id="txtHoursWorkedA6" class="w8" maxlength="6" onmouseup="this.select();" onblur="makeTotal(this);" value="0.00" readonly="readonly" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl06_tdStartTimeB" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl06_divStartTimeB" style="width: 100%; text-align: center">
+            							<input style="text-align: center; float: none; " type="text" onblur="parseTime(this);" name="txtStartTimeB6" id="txtStartTimeB6" class="w8_touch" maxlength="5" onmouseup="this.select();"
+                                        value="--:--" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl06_tdEndTimeB" align="center">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl06_divEndTimeB" style="width: 100%; text-align: center">
+            							<input style="text-align: center; float: none; " type="text" onblur="parseTime(this);makeTotal(this);" name="txtEndTimeB6" id="txtEndTimeB6" class="w8_touch" maxlength="5" onmouseup="this.select();"
+                                        value="--:--" />
+            						</div>
+            					</td>
+
+            					<td align="right" class="expnoshow6">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl06_divHoursWorkedB" style="float: right">
+
+            									<input type="text" name="txtHoursWorkedB6" id="txtHoursWorkedB6" class="w8" maxlength="6" style="text-align:right; background-color: transparent; border:0px; " tabindex="-1" readonly="readonly" onmouseup="this.select();" onblur="this.value=FixedDP(this.value, '0.00', 2); makeTotal(this);" value="0.00" />
+            							</div>
+            					</td>
+            					<td id="ctl00_Main_ctl35_TSContent_ctl06_tdTotalHours" align="right" style="border-right: 0px;">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl06_divTotalHours" style="float: right">
+            							<input type="text" name="txtTotalHours6" id="txtTotalHours6" class="w8_touch" value="0.00" tabindex="-1" readonly="readonly" style="text-align: right; background-color: transparent; border: 0px; " />
+            						</div>
+            					</td>
+
+            					<td class="expnoshow6">
+            						&nbsp;<span id="DurationLabel6">Hrs</span>
+            					</td>
+
+
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl06_tdCliRate" align="right">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl06_divCliRate" style="float: right">
+            							<input style="text-align: right; background-color: transparent;" type="text" tabindex="-1" class="w8_touch" readonly="readonly" value="10.31" name="CliRate6" id="CliRate6" />
+            						</div>
+            					</td>
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl06_tdRateTotal" align="right">
+
+            						<div id="ctl00_Main_ctl35_TSContent_ctl06_divRateTotal" style="float: right">
+            							<input style="text-align: right; background-color: transparent;" type="text" tabindex="-1" class="w8_touch" readonly="readonly"
+            							value="0.00" name="ratetotal6" id="ratetotal6" />
+            						</div>
+            					</td>
+
+
+
+            					<td id="ctl00_Main_ctl35_TSContent_ctl06_tdAddRemove" style="text-align: center">
+            						<div id="ctl00_Main_ctl35_TSContent_ctl06_divAddRemove">
+            							<input type="button" id="AddRowButton6" value="Add Row" onclick="AddRow(this, 6)"  />
+            							<input type="button" id="SplitShiftButton6" value="Split Shift" onclick="AddRow(this, 6)" style="display:none;" />
+            							<input type="button" id="DelRowButton6" value="Remove" onclick="DelRow(this)" style="display:none;" />
+            						</div>
+            					</td>
+
+
+            				</tr>
+
+            	</tbody>
+            	<tfoot>
+            		<tr>
+            			<th>
+            				Total
+            			</th>
+            			<td colspan="7">
+            			</td>
+
+            			<td align="right">
+
+
+            				<div id="ctl00_Main_ctl35_divTotalHours" style="float: right">
+            					<input style="background-color: transparent; border: 0px; text-align: right" readonly="readonly" tabindex="-1" type="text" name="txtTotalHours" id="txtTotalHours" class="w8_touch" value="0.00" />
+            				</div>
+            			</td>
+            			<td>
+            				&nbsp;
+            			</td>
+
+
+
+            			<td id="ctl00_Main_ctl35_tdRateBlank">
+            				&nbsp;
+            			</td>
+
+            			<td id="ctl00_Main_ctl35_tdAuthTotalRate" align="right">
+
+            				<div id="ctl00_Main_ctl35_divTotalRate" style="float: right">
+            					<span style="float:left">GBP</span>
+            					<input style="background-color: transparent; border: 0px; text-align: right" readonly="readonly" tabindex="-1" type="text" name="txtTotalRate" id="txtTotalRate" class="w8_touch" value="0.00" />
+            				</div>
+            				<input type="hidden" name="TSValue" id="TSValue" value="0.00" />
+            				<input type="hidden" name="TSTotalHours" id="TSTotalHours" value="0.00" />
+            			</td>
+
+
+
+            			<td id="ctl00_Main_ctl35_tdAddRemoveBlank">
+            				&nbsp;
+            			</td>
+
+            		</tr>
+
+
+
+            	</tfoot>
+            </table>
+            </div>
+        	<br />
+
+        	<br />
+        	<table id="ctl00_Main_tableAuthFooter" class="FormContent">
+        	<tr id="ctl00_Main_trAuthFileUpload">
+        		<th>
+        					Attach Document(s)
+        				</th>
+        		<td>
+        					<input type="file" name="ctl00$Main$AuthFileUpload" id="ctl00_Main_AuthFileUpload" />
+        				</td>
+        	</tr>
+        	<tr>
+        		<th>
+        					Contractor Comments
+        				</th>
+        		<td colspan="2">
+        					<input type="hidden" name="txtSpecialConds" id="txtSpecialConds" value="" />
+
+        				</td>
+        	</tr>
+        	<tr>
+        		<th>
+        					Authoriser Comments
+        				</th>
+        		<td>
+        					<textarea name="Comment" id="Comment" cols="70" rows="3" style="float: none; width: 400px" onkeyup="textLimit(this, 250);" onchange="textLimit(this, 250);"></textarea>
+        					<br />
+        					<span class="msg" id="Comment_LenMsg">&nbsp;</span>
+        				</td>
+        	</tr>
+        	<tr>
+        		<td colspan="2">
+        					<input type="hidden" name="UniqueID" id="UniqueID" value="" />
+        					<input type="hidden" name="conEmail" id="conEmail" value="derek.macrae@impellam.com" />
+        					<div id="buttonDiv" class="InputButtonContainer">
+        						<input type="submit" name="ctl00$Main$subAuthSave" value="Save" onclick="gloValidate = false;return validate();" id="ctl00_Main_subAuthSave" />
+
+
+        						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        						<input type="submit" name="ctl00$Main$subAuthAccept" value="Accept" onclick="gloValidate = false;return validate();" id="ctl00_Main_subAuthAccept" />
+        						<input type="submit" name="ctl00$Main$subAuthReject" value="Reject" onclick="return DoReject();" id="ctl00_Main_subAuthReject" />
+        					</div>
+        				</td>
+        	</tr>
+<script>
+    var hour = 0, min = 0, angle, hourRotate, minRotate, hrotate, mrotate, $this;
+    var cellLeft, cellTop, cellCentreX, cellCentreY, hourOffset = 0;
+        
+    $(document).ready(function(){
+        $('.w8_touch').bind('touchstart',function(e){
+            $this = $(this);
+            $("#theClock").css({'opacity' : 1});
+            $("#theHourHand").css({'opacity' : 0.8});
+            $("#theEdgeGlow").css({'opacity' : 1});
+//            $("#theCentre").css({'opacity' : 0.9});
+            $("#theMinHand").css({'opacity' : 0.3});
+            cellLeft = findPos(this)[0]-90;
+            cellTop = findPos(this)[1]-103;
+            cellCentreX = findPos(this)[0] + $this.width()/2;
+            cellCentreY = findPos(this)[1] + $this.height()/2;
+            $("#theClock").css({'left' : String(cellLeft-33) + 'px'});
+            $("#theClock").css({'top' : String(cellTop-37) + 'px'});
+            var time = $(this).val();
+            hour = time.substring(0,time.indexOf(':'));
+            min = time.substring(time.indexOf(':')+1,time.length);
+            if (hour != "--"){
+                hour = Number(hour);
+                min = Number(min);
+            } else {
+                hour = 0 // for testing random ... Math.floor((Math.random()*12));
+                min = 0  // for testing random ... 15*(Math.floor((Math.random()*4)));
+            }
+            hourRotate = hour*30 + min/2;
+            minRotate = min*6;
+            hrotate = "rotate(" + hourRotate + "deg)";
+            mrotate = "rotate(" + minRotate + "deg)";
+            $("#theHourHand").css({'left' : String(cellCentreX) + 'px'});
+            $("#theHourHand").css({'top' : String(cellTop+46) + 'px'});
+//            $("#theCentre").css({'left' : String(cellCentreX) + 'px'});
+//            $("#theCentre").css({'top' : String(cellCentreY) + 'px'});
+            $("#theEdgeGlow").css({'left' : String(cellCentreX-3) + 'px'});
+            $("#theEdgeGlow").css({'top' : String(cellTop+5) + 'px'});
+            $("#theMinHand").css({'left' : String(cellCentreX) + 'px'});
+            $("#theMinHand").css({'top' : String(cellTop+34) + 'px'});
+            $("#theHourHand").css({"-moz-transform" : hrotate, "-webkit-transform" : hrotate, "-ms-transform" : hrotate});
+            $("#theEdgeGlow").css({"-moz-transform" : hrotate, "-webkit-transform" : hrotate, "-ms-transform" : hrotate});
+            $("#theMinHand").css({"-moz-transform" : mrotate, "-webkit-transform" : mrotate, "-ms-transform" : mrotate});
+            $(this).css({'z-index' : '500'});
+            var strHr = '0' + String(hour + hourOffset);
+            strHr = strHr.substring(strHr.length,strHr.length-2)
+            var strMin = '0' + String(min);
+            strMin = strMin.substring(strMin.length,strMin.length-2)
+            $(this).val(strHr + ':' + strMin);
+            this.select();
+            event.preventDefault();
+        });
+        $('.w8_touch').bind('touchend',function(e){
+            $("#theClock").css({'opacity' : 0});
+            $("#theClock24").css({'opacity' : 0});
+            $("#theHourHand").css({'opacity' : 0});
+            $("#theEdgeGlow").css({'opacity' : 0});
+            $("#theMinHand").css({'opacity' : 0});
+            $("#theClock").css({'left' : '-400px'});
+            $("#theClock").css({'top' : '-400px'});
+            $("#theClock24").css({'left' : '-400px'});
+            $("#theClock24").css({'top' : '-400px'});
+            $("#theHourHand").css({'left' : '-400px'});
+            $("#theHourHand").css({'top' : '-400px'});
+            $(this).css({'z-index' : '1'});
+            event.preventDefault();
+        });
+        $(".w8_touch").bind('touchmove',function(e){
+            var minRoundTo = 15; // Minutes are in 15 min intervals, change this to e.g. 5 for 5 minute intervals
+            e.preventDefault();
+            var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+            var xlen, ylen, sign, offset = 0;
+            xlen = cellCentreX - touch.pageX;
+            ylen = cellCentreY -  touch.pageY;
+            if(xlen > 0){
+                offset = 270;
+                if (ylen > 0){
+                    sign = 1;
+                } else {
+                    sign = -1;
+                }
+            } else {
+                offset = 90;
+                if (ylen > 0){
+                    sign = -1;
+                } else {
+                    sign = 1;
+                }
+            }
+            xlen = Math.abs(xlen);
+            ylen = Math.abs(ylen);
+
+            angle = offset + sign*180*Math.atan(ylen/xlen)/Math.PI;
+            hour = Math.floor(angle/30);
+            min = minRoundTo * Math.floor((angle % 30)/(minRoundTo/2));
+
+            if (hour == 0 && min == 0){
+                hour =12;
+            }
+            
+            hourOffset = 0;
+            
+            if (Math.sqrt(xlen*xlen + ylen*ylen) > 110){
+                $("#theClock").css({'opacity' : 0});
+                $("#theClock24").css({'opacity' : 1});
+                $("#theClock24").css({'left' : String(cellLeft-33) + 'px'});
+                $("#theClock24").css({'top' : String(cellTop-37) + 'px'});
+                $("#theEdgeGlow").css({"-moz-transform-origin" : "50% 136px", "-webkit-transform-origin" : "50% 136px", "-ms-transform-origin" : "50% 136px", "top" : String(cellTop-27) + "px"});
+    	        $("#theEdgeGlow").css({"width" : "12px", "height" : "12px"});
+                hourOffset = 12;
+            } else {
+                $("#theClock").css({'opacity' : 1});
+                $("#theClock24").css({'opacity' : 0});
+                $("#theEdgeGlow").css({"-moz-transform-origin" : "50% 104px", "-webkit-transform-origin" : "50% 104px", "-ms-transform-origin" : "50% 104px"});
+                $("#theEdgeGlow").css({"top" : String(cellTop+5) + "px", "width" : "10px", "height" : "10px"});
+            };
+
+            hourRotate = hour*30 + min/2;
+            minRotate = min*6;
+            hrotate = "rotate(" + hourRotate + "deg)";
+            mrotate = "rotate(" + minRotate + "deg)";
+            $("#theHourHand").css({"-moz-transform" : hrotate, "-webkit-transform" : hrotate, "-ms-transform" : hrotate});
+            $("#theEdgeGlow").css({"-moz-transform" : hrotate, "-webkit-transform" : hrotate, "-ms-transform" : hrotate});
+            $("#theMinHand").css({"-moz-transform" : mrotate, "-webkit-transform" : mrotate, "-ms-transform" : hrotate});
+            var strHr = '0' + String(hour + hourOffset);
+            strHr = strHr.substring(strHr.length,strHr.length-2)
+            var strMin = '0' + String(min);
+            strMin = strMin.substring(strMin.length,strMin.length-2)
+            $this.val(strHr + ':' + strMin);
+            $this.select();
+        });
+    })
+</script>
+    </body>
+</html>
